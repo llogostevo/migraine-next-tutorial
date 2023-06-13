@@ -1,7 +1,12 @@
-import './globals.scss'
-import { Inter } from 'next/font/google'
+"use client";
 
-const inter = Inter({ subsets: ['latin'] })
+import './globals.scss'
+import React, {useState} from "react"
+import {lightTheme, darkTheme} from "./theme/theme"
+import { ThemeProvider, CssBaseline } from '@mui/material'; 
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs"
+import Header  from "./components/Header"
 
 export const metadata = {
   title: 'Create Next App',
@@ -13,9 +18,20 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const [isDark, setIsDark] = useState(false);
+  const switchTheme: any = () => {
+    setIsDark(!isDark);
+  }
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <CssBaseline />
+        <Header />
+          <body>{children}</body>
+        </LocalizationProvider>
+      </ThemeProvider>
+
     </html>
   )
 }
