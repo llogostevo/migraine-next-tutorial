@@ -27,7 +27,7 @@ export default function RootLayout({
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
         <CssBaseline />
-        <Header />
+        <Header switchTheme={switchTheme}/>
           <body>{children}</body>
         </LocalizationProvider>
       </ThemeProvider>
